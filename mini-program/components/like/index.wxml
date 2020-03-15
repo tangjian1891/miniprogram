@@ -1,0 +1,4 @@
+<view class="container" bind:tab="onLike">
+  <image class="like" src="{{like?'./images/like.png':'./images/dislike.png'}}"></image>
+  <text>{{count}}</text>
+</view>

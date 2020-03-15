@@ -1,0 +1,61 @@
+<wxs module="m1">
+  var calcExpress = function(type) {
+    var obj = {
+      'none': '不笑',
+      'smile': "微笑",
+      'laugh': '大笑'
+    }
+    return obj[type]
+  }
+  var calcEmotion = function(type) {
+    var obj1 = {
+      angry: '愤怒',
+      disgust: '厌恶',
+      fear: '恐惧',
+      happy: '高兴',
+      sad: '伤心',
+      surprise: '惊讶',
+      neutral: '无表情',
+      pouty: '撅嘴',
+      grimace: '鬼脸'
+    }
+    return obj1[type]
+  }
+
+  module.exports = {
+    calcExpress: calcExpress,
+    calcEmotion: calcEmotion
+  };
+</wxs>
+<view class="container">
+  <text class="title">拉取百度AI人脸识别算法</text>
+  <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
+  <view class="show-detail" wx:if="{{flag}}">
+    <view class="easy-prop shrink ">
+      <view>
+        <text>年龄:</text>{{face_list.age}}</view>
+      <view>
+        <text>颜值(百分制):</text>{{face_list.beauty}}</view>
+      <view>
+        <text>表情:</text>{{m1.calcExpress(face_list.expression.type)}}</view>
+      <view>
+        <text>性别:</text>{{face_list.gender.type==='male'?'男性':'女性'}}</view>
+    </view>
+    <view class="space"></view>
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+      <van-collapse-item title="查看更多数据" name="1">
+       <view class="easy-prop">
+        <view>
+          <text>是否带眼镜:</text>{{face_list.glasses.type==='none'?'没有':'有戴眼镜'}}</view>
+        <view>
+          <text>是否带口罩:</text>{{face_list.mask.type==0?'没有':'有戴口罩'}}</view>
+        <view>
+          <text>卡通/真人:</text>{{face_list.face_type.type==='human'?'真人':'卡通'}}</view>
+        <view>
+          <text>情绪:</text>{{ m1.calcEmotion(face_list.emotion.type)}}</view>
+       </view>
+      </van-collapse-item>
+    </van-collapse>
+  </view>
+
+</view>

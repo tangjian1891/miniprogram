@@ -1,0 +1,21 @@
+<view>
+  <view class='header'>
+    <c-epsoide month="{{nowMonth}}" nowArticle="{{nowArticle}}" year="2020" />
+    <view class="like-container">
+      <c-like bind:tap="operFavor" like="{{isLike}}" count="{{classic.fav_nums}}" />
+      <!-- <img-btn-cmp class="share-btn" open-type="share">
+        <image class="share" slot="img" src="/images/icon/share.png" />
+      </img-btn-cmp> -->
+      <c-share/>
+    </view>
+  </view>
+
+
+  <c-movie wx:if="{{classic.type==='100'}}" image="{{classic.image}}" content="{{classic.content}}" />
+
+  <c-music bind:startMusic="startMusic" playing="{{playing}}" wx:if="{{classic.type==='200'}}" image="{{classic.image}}" content="{{classic.content}}" />
+
+  <c-sentence wx:if="{{classic.type==='300'}}" image="{{classic.image}}" content="{{classic.content}}" />
+
+  <c-navi bind:right="right" bind:left="left" first="{{first}}" latest="{{latest}}" class="navi" title="{{classic.title}}"></c-navi>
+</view>

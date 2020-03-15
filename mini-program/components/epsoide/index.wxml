@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="index-container">
+    <text class="plain">No.</text>
+    <text class="index">{{nowArticle}}</text>
+    <view class="vertical-line"></view>
+  </view>
+
+  <view>
+    <view class="date">
+      <text class="month">{{month}}</text>
+      <text class="year">{{year}}</text>
+    </view>
+
+  </view>
+
+</view>

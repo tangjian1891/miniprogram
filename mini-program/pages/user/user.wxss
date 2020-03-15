@@ -1,0 +1,45 @@
+ 
+.container {
+  display: flex;
+  flex-direction: column;
+
+}
+.bg {
+  width: 750rpx;
+  height: 574rpx;
+}
+
+.top-show-avatar{
+   width: 750rpx;
+  height: 574rpx;
+  position: relative;
+}
+.reset-btn{
+  padding: 0 !important;
+  border:none !important;
+}
+.avatar{
+  width:120rpx;
+  height:120rpx;
+  border-radius: 50%;
+
+}
+ 
+.avatar-container{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.nickname{
+  display: flex;
+  justify-content: center;
+}
+.avatar-position{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top:50%;
+}
+.fun-view{
+margin-bottom: 10rpx;
+}

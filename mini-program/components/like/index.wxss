@@ -1,0 +1,18 @@
+.container{
+  display: inline-flex;
+  padding: 10rpx; 
+
+}
+.container .like {
+  width: 32rpx;
+  height: 28rpx;
+}
+
+.container text {
+  color: #bbb;
+  position: relative;
+  font-size: 24rpx;
+  /* line-height: 24rpx; */
+  bottom: 10rpx;
+  left: 6rpx;
+}

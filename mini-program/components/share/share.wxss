@@ -1,0 +1,12 @@
+/* components/share/share.wxss */
+.share-btn{
+  width: 50rpx;
+  height: 50rpx;
+  padding: 10rpx;
+}
+.share-button{
+  background-color: #fff;
+  display: flex;
+  align-items:center;
+}
+.share-button::after { border: none; }
