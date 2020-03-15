@@ -165,6 +165,13 @@ Page({
       isLike
     }).then(res => {
       console.log(res)
+      if (res.statusCode!==201){
+        wx.showToast({
+          title: '请去用户中心先登录',
+          icon:'none'
+        })
+        return
+      }
       if (res.data.isLike === 1) {
         this.setData({
           isLike: true,
