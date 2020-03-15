@@ -5,6 +5,6 @@ import { config } from './core/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   global['config'] = config;
-  await app.listen(3000);
+  await app.listen(5858);
 }
 bootstrap();

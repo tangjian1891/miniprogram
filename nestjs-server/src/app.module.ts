@@ -12,8 +12,35 @@ import { Connection } from 'typeorm';
 import { UserModule } from './user/user.module';
 import { AuthMiddleware } from './app.middleware';
 import { PeriodicalController } from './article/periodical.controller';
+import {
+  MovieEntity,
+  SentenceEntity,
+  MusicEntity,
+  PeriodicalEntity,
+} from './article/entity/periodical.entity';
+import { UserEntity } from './user/entity/user.entity';
 @Module({
-  imports: [TypeOrmModule.forRoot(), PeriodicalModule, UserModule],
+  imports: [
+    PeriodicalModule,
+    UserModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: '106.54.139.232',
+      port: 3306,
+      username: 'root',
+      password: '654321',
+      database: 'summer_is_coming',
+      entities: [
+        MovieEntity,
+        SentenceEntity,
+        MusicEntity,
+        PeriodicalEntity,
+        UserEntity,
+      ],
+      logging: false,
+      synchronize: false,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
