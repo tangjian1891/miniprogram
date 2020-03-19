@@ -8,6 +8,7 @@ import {
   MusicEntity,
   PeriodicalEntity,
 } from './entity/periodical.entity';
+import { FavorEntity } from './entity/favor.entity';
 
 @Module({
   imports: [
@@ -16,9 +17,10 @@ import {
       SentenceEntity,
       MusicEntity,
       PeriodicalEntity,
+      FavorEntity
     ]),
   ],
   providers: [PeriodicalService],
   controllers: [PeriodicalController],
 })
-export class PeriodicalModule {}
+export class PeriodicalModule { }

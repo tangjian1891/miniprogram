@@ -19,6 +19,7 @@ import {
   PeriodicalEntity,
 } from './article/entity/periodical.entity';
 import { UserEntity } from './user/entity/user.entity';
+import { FavorEntity } from './article/entity/favor.entity';
 @Module({
   imports: [
     PeriodicalModule,
@@ -36,6 +37,7 @@ import { UserEntity } from './user/entity/user.entity';
         MusicEntity,
         PeriodicalEntity,
         UserEntity,
+        FavorEntity
       ],
       logging: false,
       synchronize: false,
@@ -45,7 +47,7 @@ import { UserEntity } from './user/entity/user.entity';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  constructor(private readonly connection: Connection) {}
+  constructor(private readonly connection: Connection) { }
 
   async configure(consumer: MiddlewareConsumer) {
     consumer
