@@ -1,11 +1,10 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserDto, UserLoginDto } from './dto/user.dto';
 import { UserService } from './user.service';
-var jwt = require('jsonwebtoken');
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userServuce: UserService) {}
+  constructor(private readonly userServuce: UserService) { }
   @Post('register')
   register(@Body() userDto: UserDto) {
     // 暂时不做邮箱登录

@@ -34,6 +34,16 @@ Page({
     nowMonth:"",//当前的月份
     isFirstLoad:true
   },
+  onShow(){
+    let token= wx.getStorageSync('token')
+    if(token){
+      this.getIsLike()
+    }else{
+      this.setData({
+        isLike:false
+      })
+    }
+  },
   // 开始音乐
   startMusic() {
     console.log('播放音乐吧')
@@ -80,6 +90,7 @@ Page({
     this.setData({
       currentIndex: this.data.currentIndex + 1,
       classic: this.data.classicData[this.data.currentIndex + 1],
+      isLike:false
     })
     this.getIsLike()
     this.setData({
@@ -94,6 +105,7 @@ Page({
     this.setData({
       currentIndex: this.data.currentIndex - 1,
       classic: this.data.classicData[this.data.currentIndex - 1],
+      isLike: false
     })
     // 查看用户是否点赞
     this.getIsLike()
@@ -117,22 +129,28 @@ Page({
     })
   },
   onLoad() {
+    this.initClassic()
+    // 计算当前月份
+ 
+    //判断当前是否有token
+
+    let index = new Date().getMonth()
+    this.setData({
+      nowMonth: this.data.months[index]
+    })
+  },
+
+initClassic(){
     periodicalModel.getLatest().then((res) => {
       this.setData({
         classicData: res.data,
         classic: res.data[this.data.currentIndex],
         total: res.data.length,
         nowArticle: res.data.length,
-        isFirstLoad:false
+        isFirstLoad: false
       })
       this.getIsLike()
- 
-    })
-    // 计算当前月份
-    
-    let index = new Date().getMonth()
-    this.setData({
-      nowMonth: this.data.months[index]
+
     })
   },
 
@@ -186,37 +204,40 @@ Page({
     })
   },
   onPullDownRefresh() {
-    this.setData({
-      refreshCount: this.data.refreshCount + 1
-    })
-    wx.stopPullDownRefresh({
-      success: () => {
-        let time = this.data.forbidTime
-        console.log((new Date().getTime()) - time)
-        if (time && ((new Date().getTime()) - time) > 30 * 1000) {
 
-          console.log("进入")
-          this.setData({
-            refreshCount: 1
-          })
-        }
-        if (this.data.refreshCount < 3) {
-          wx.showToast({
-            title: '刷新成功',
-          })
-        } else {
-          this.setData({
-            forbidTime: new Date().getTime()
-          })
-          wx.showToast({
-            title: '频率过快，恶意请求，已记录请求行为, 30S后放行',
-            icon: 'none',
-            duration: 2500
-          })
-        }
+    this.initClassic()
 
-      }
-    })
+    // this.setData({
+    //   refreshCount: this.data.refreshCount + 1
+    // })
+    // wx.stopPullDownRefresh({
+    //   success: () => {
+    //     let time = this.data.forbidTime
+    //     console.log((new Date().getTime()) - time)
+    //     if (time && ((new Date().getTime()) - time) > 30 * 1000) {
+
+    //       console.log("进入")
+    //       this.setData({
+    //         refreshCount: 1
+    //       })
+    //     }
+    //     if (this.data.refreshCount < 3) {
+    //       wx.showToast({
+    //         title: '刷新成功',
+    //       })
+    //     } else {
+    //       this.setData({
+    //         forbidTime: new Date().getTime()
+    //       })
+    //       wx.showToast({
+    //         title: '频率过快，恶意请求，已记录请求行为, 30S后放行',
+    //         icon: 'none',
+    //         duration: 2500
+    //       })
+    //     }
+
+    //   }
+    // })
 
   }
 })

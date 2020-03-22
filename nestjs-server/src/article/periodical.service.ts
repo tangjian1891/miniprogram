@@ -13,7 +13,7 @@ export class PeriodicalService {
   async findPeriodical() {
     const Periodicals = await getRepository(PeriodicalEntity).find();
 
-    let periodicalObj = {
+    const periodicalObj = {
       100: [],
       200: [],
       300: [],
@@ -23,13 +23,13 @@ export class PeriodicalService {
       periodicalObj[periodical.type].push(periodical.per_id);
     });
     // 使用in查询。三次查出所有
-    let keys = Object.keys(periodicalObj);
-    let resList = [];
+    const keys = Object.keys(periodicalObj);
+    const resList = [];
 
     for (let i = 0; i < keys.length; i++) {
       if (periodicalObj[keys[i]].length > 0) {
-        let list = await this.getListByType(keys[i], periodicalObj[keys[i]]);
-        let newList = list.map(item => {
+        const list = await this.getListByType(keys[i], periodicalObj[keys[i]]);
+        const newList = list.map(item => {
           item['type'] = keys[i];
           return item;
         });
@@ -58,8 +58,9 @@ export class PeriodicalService {
 
   // 用户是否对指定article点赞'
   async isFavorByUid(uid: number, art_id: number, type: number) {
+    console.log(uid, art_id, type)
     try {
-      let favor = await getRepository(FavorEntity).findOne({
+      const favor = await getRepository(FavorEntity).findOne({
         uid,
         art_id,
         type,
@@ -76,7 +77,7 @@ export class PeriodicalService {
 
   // 点赞
   async like(uid: number, art_id: number, type: number) {
-    let favor = new FavorEntity();
+    const favor = new FavorEntity();
     favor.uid = uid;
     favor.art_id = art_id;
     favor.type = type;
@@ -88,7 +89,7 @@ export class PeriodicalService {
 
   // 取消点赞
   async dislike(uid: number, art_id: number, type: number) {
-    let favor = new FavorEntity();
+    const favor = new FavorEntity();
     favor.uid = uid;
     favor.art_id = art_id;
     favor.type = type;

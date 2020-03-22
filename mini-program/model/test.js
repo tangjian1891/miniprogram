@@ -1,0 +1,1 @@
+export var name1='NMB'

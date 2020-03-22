@@ -8,5 +8,6 @@ export const config = {
   token: {
     secretKey: 'wdnmd', //
     expiresIn: 60 * 60,
+    // expiresIn: 10,
   },
 };

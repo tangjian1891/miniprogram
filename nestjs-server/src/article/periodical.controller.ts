@@ -10,7 +10,7 @@ import { PeriodicalService } from './periodical.service';
 
 @Controller('periodical')
 export class PeriodicalController {
-  constructor(private readonly periodicalService: PeriodicalService) {}
+  constructor(private readonly periodicalService: PeriodicalService) { }
   @Get()
   async findPeriodical() {
     const res = await this.periodicalService.findPeriodical();
@@ -19,9 +19,9 @@ export class PeriodicalController {
   }
   @Post('isFavor')
   async isFavorByUid(@Body() operFvor: any, @Query('uid') uid: number) {
-    let art_id = operFvor.art_id;
-    let type = parseInt(operFvor.type) || 0;
-    let flag = await this.periodicalService.isFavorByUid(uid, art_id, type);
+    const art_id = operFvor.art_id;
+    const type = parseInt(operFvor.type) || 0;
+    const flag = await this.periodicalService.isFavorByUid(uid, art_id, type);
     return {
       flag,
     };
@@ -30,8 +30,8 @@ export class PeriodicalController {
   @Post('operFavor')
   async operFavor(@Body() operFvor: any, @Query('uid') uid: number) {
     //进行点赞或取消点赞操作  art_id, type, isLike
-    let art_id = operFvor.art_id;
-    let type = parseInt(operFvor.type) || 0;
+    const art_id = operFvor.art_id;
+    const type = parseInt(operFvor.type) || 0;
     let msg;
     try {
       if (operFvor.isLike === 1) {

@@ -20,6 +20,7 @@ import {
 } from './article/entity/periodical.entity';
 import { UserEntity } from './user/entity/user.entity';
 import { FavorEntity } from './article/entity/favor.entity';
+import { UserController } from './user/user.controller';
 @Module({
   imports: [
     PeriodicalModule,
@@ -29,7 +30,7 @@ import { FavorEntity } from './article/entity/favor.entity';
       host: '106.54.139.232',
       port: 3306,
       username: 'root',
-      password: '654321',
+      password: 'root3306',
       database: 'summer_is_coming',
       entities: [
         MovieEntity,

@@ -3,19 +3,24 @@
   <view class="top-show-avatar">
     <image src="/images/my/my@bg.png" class="bg"></image>
     <view class="avatar-position">
-      <!-- 点击登录 -->
-      <button wx:if="{{!hasUserInfo}}" class="reset-btn avatar-container" open-type='getUserInfo' bindgetuserinfo="getUserInfo">
-        <image  class="avatar " src='/images/my/study.png'></image>
+      <!-- 点击授权 -->
+      <button wx:if="{{!isWXAuth||!hasToken}}" class="reset-btn avatar-container" bind:tap="login">
+        <image class="avatar " src='/images/my/study.png'></image>
       </button>
       <!-- 登录后显示头像。昵称 -->
       <view class="avatar-container ">
-        <image class="avatar" src="{{userInfo.avatarUrl}}" wx:if="{{hasUserInfo}}"   />
-        <open-data class="nickname" wx:if="{{hasUserInfo}}" type="userNickName"></open-data>
+        <image class="avatar" src="{{userInfo.avatarUrl}}" wx:if="{{isWXAuth&&hasToken}}" />
+        <open-data class="nickname" wx:if="{{isWXAuth&&hasToken}}" type="userNickName"></open-data>
       </view>
     </view>
   </view>
   <view class="fun-container" wx:if="{{hasUserInfo}}">
-  <button bind:tap="switchAI" class="fun-view" type ="primary">AI拍照打分</button> 
-   <button class="fun-view">创意工坊制作中...</button> 
+    <button bind:tap="switchAI" class="fun-view" type="primary">AI拍照打分</button>
+    <button class="fun-view">创意工坊制作中...</button>
   </view>
+  <van-popup position="bottom" show="{{ showPopup }}" bind:close="closePopup">
+    <button wx:if="{{!hasUserInfo}}" class="reset-btn avatar-container" open-type='getUserInfo' bindgetuserinfo="getUserInfo">
+      <image class="avatar " src='/images/my/study.png'></image>
+    </button>
+  </van-popup>
 </view>

@@ -1,7 +1,7 @@
 import {
   config
 } from "../config.js"
-
+ 
 class Http {
   request(  { url, method="GET",data,header}) {
     // let header = Object.assign({
@@ -18,6 +18,7 @@ class Http {
           Authorization
         },header),
         success: (res) => {
+          console.log(res)
           let code = res.statusCode.toString()
           if (code.startsWith('5')) {
             wx.showToast({
@@ -25,9 +26,15 @@ class Http {
               icon: 'none',
               duration: 2000
             })
-          } else if (code===401){
+          } else if (code==='401'){
               // 权限不足。。直接静默登录
               console.log("未授权")
+           wx.showToast({
+             title: '请先登录',
+             icon:"none"
+           })
+            wx.clearStorageSync('token')
+            wx.clearStorage('')
           }
           
            else  {
